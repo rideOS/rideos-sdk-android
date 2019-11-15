@@ -22,6 +22,7 @@ import ai.rideos.android.common.authentication.User;
 import ai.rideos.android.common.device.InputMethodManagerKeyboardManager;
 import ai.rideos.android.common.device.KeyboardManager;
 import ai.rideos.android.common.fleets.ResolvedFleet;
+import ai.rideos.android.common.view.errors.ErrorDialog;
 import ai.rideos.android.driver_app.R;
 import ai.rideos.android.driver_app.dependency.DriverDependencyRegistry;
 import android.os.Bundle;
@@ -39,11 +40,14 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
+
 import java.util.function.Consumer;
 
 public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, RegisterVehicleListener> {
     private CompositeDisposable compositeDisposable;
 
+    private User user;
     private RegisterVehicleViewModel viewModel;
 
     @Override
@@ -55,11 +59,12 @@ public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, Re
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        user = User.get(getContext());
         viewModel = new DefaultRegisterVehicleViewModel(
-            DriverDependencyRegistry.driverDependencyFactory().getDriverVehicleInteractor(getContext()),
-            User.get(getContext()),
-            ResolvedFleet.get().observeFleetInfo(),
-            getListener()
+                DriverDependencyRegistry.driverDependencyFactory().getDriverVehicleInteractor(getContext()),
+                user,
+                ResolvedFleet.get().observeFleetInfo(),
+                getListener()
         );
     }
 
@@ -68,9 +73,9 @@ public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, Re
                              final ViewGroup container,
                              final Bundle savedInstanceState) {
         final TransitionSet transitionSet = new TransitionSet()
-            .addTransition(new Slide(Gravity.BOTTOM)
-                .addTarget("vehicle_registration")
-            );
+                .addTransition(new Slide(Gravity.BOTTOM)
+                        .addTarget("vehicle_registration")
+                );
         setSharedElementEnterTransition(transitionSet);
         setExitTransition(transitionSet);
         return inflater.inflate(R.layout.register_vehicle, container, false);
@@ -93,7 +98,7 @@ public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, Re
         listenToEditText(licenseInput, viewModel::setLicensePlate);
 
         final EditText capacityInput = view.findViewById(R.id.registration_rider_capacity_input);
-        listenToEditText(capacityInput, input -> viewModel.setRiderCapacity(Integer.parseInt(input)));
+        listenToEditText(capacityInput, input -> viewModel.setRiderCapacity(input.isEmpty() ? 0 : Integer.parseInt(input)));
 
         final Toolbar toolbar = view.findViewById(R.id.title_bar);
         toolbar.setNavigationOnClickListener(click -> {
@@ -103,18 +108,30 @@ public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, Re
 
         final Button saveButton = view.findViewById(R.id.save_button);
         saveButton.setOnClickListener(click -> {
-            viewModel.save();
+            compositeDisposable.add(
+                    viewModel.save()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(result -> {
+                                if (result.isFailure()) {
+                                    String errorMessage = getContext().getString(result.getFailureInfo());
+                                    ErrorDialog errorDialog = new ErrorDialog(getContext());
+                                    errorDialog.show(errorMessage);
+                                }
+                            })
+            );
             keyboardManager.hideKeyboard();
         });
 
-        compositeDisposable.addAll(
-            viewModel.isSavingEnabled().observeOn(AndroidSchedulers.mainThread()).subscribe(enabled -> {
-                if (enabled) {
-                    saveButton.setVisibility(View.VISIBLE);
-                } else {
-                    saveButton.setVisibility(View.GONE);
-                }
-            })
+        compositeDisposable.add(
+                viewModel.isSavingEnabled()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(enabled -> {
+                            if (enabled) {
+                                saveButton.setVisibility(View.VISIBLE);
+                            } else {
+                                saveButton.setVisibility(View.GONE);
+                            }
+                        })
         );
     }
 
@@ -139,5 +156,6 @@ public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, Re
     public void onStop() {
         super.onStop();
         compositeDisposable.dispose();
+        viewModel.destroy();
     }
 }

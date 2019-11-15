@@ -15,13 +15,16 @@
  */
 package ai.rideos.android.driver_app.vehicle_unregistered.register_vehicle;
 
+import ai.rideos.android.common.reactive.CompletionResult;
 import ai.rideos.android.common.viewmodel.ViewModel;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface RegisterVehicleViewModel extends ViewModel {
     Observable<Boolean> isSavingEnabled();
 
-    void save();
+    Single<CompletionResult<Integer>> save();
 
     void setPreferredName(final String preferredName);
 

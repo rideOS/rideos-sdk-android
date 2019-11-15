@@ -17,20 +17,24 @@ package ai.rideos.android.driver_app.vehicle_unregistered.register_vehicle;
 
 import ai.rideos.android.common.authentication.User;
 import ai.rideos.android.common.model.FleetInfo;
+import ai.rideos.android.common.reactive.CompletionResult;
 import ai.rideos.android.common.reactive.SchedulerProvider;
 import ai.rideos.android.common.reactive.SchedulerProviders.DefaultSchedulerProvider;
+import ai.rideos.android.driver_app.R;
 import ai.rideos.android.interactors.DriverVehicleInteractor;
 import ai.rideos.android.model.VehicleRegistration;
+
 import android.telephony.PhoneNumberUtils;
+import androidx.annotation.VisibleForTesting;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
-import java.util.function.Function;
 import timber.log.Timber;
 
+import java.util.function.Function;
+
 public class DefaultRegisterVehicleViewModel implements RegisterVehicleViewModel {
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private final BehaviorSubject<String> nameSubject = BehaviorSubject.createDefault("");
     private final BehaviorSubject<String> phoneSubject = BehaviorSubject.createDefault("");
@@ -87,9 +91,8 @@ public class DefaultRegisterVehicleViewModel implements RegisterVehicleViewModel
     }
 
     @Override
-    public void save() {
-        compositeDisposable.add(
-            observableFleet.firstOrError()
+    public Single<CompletionResult<Integer>> save() {
+        return observableFleet.firstOrError()
                 .flatMapCompletable(fleetInfo -> {
                     final VehicleRegistration registration = new VehicleRegistration(
                         nameSubject.getValue(),
@@ -102,14 +105,15 @@ public class DefaultRegisterVehicleViewModel implements RegisterVehicleViewModel
                     if (!isVehicleRegistrationValid(registration)) {
                         return Completable.error(new IllegalArgumentException("Invalid registration"));
                     }
-                    return vehicleInteractor.createVehicle(user.getId(), fleetInfo.getId(), registration);
+                    return vehicleInteractor
+                            .createVehicle(user.getId(), fleetInfo.getId(), registration);
                 })
-                .subscribe(
-                    registerVehicleListener::doneRegistering,
-                    // For now, just log errors, but we should probably show this to the user.
-                    e -> Timber.e(e, "Failed to create vehicle %s", user.getId())
-                )
-        );
+                .doOnComplete(registerVehicleListener::doneRegistering)
+                .toSingleDefault(CompletionResult.<Integer>success())
+                .onErrorReturn(e -> {
+                    Timber.e(e, "Failed to create vehicle %s", user);
+                    return CompletionResult.failure(e, convertErrorToErrMsgId(e));
+                });
     }
 
     @Override
@@ -133,14 +137,28 @@ public class DefaultRegisterVehicleViewModel implements RegisterVehicleViewModel
     }
 
     @Override
-    public void destroy() {
-        compositeDisposable.dispose();
-    }
+    public void destroy() { }
 
     private boolean isVehicleRegistrationValid(final VehicleRegistration registration) {
         return registration.getPreferredName().length() > 0
             && phoneNumberValidator.apply(registration.getPhoneNumber())
             && registration.getLicensePlate().length() > 0
             && registration.getRiderCapacity() > 0;
+    }
+
+    @VisibleForTesting
+    int convertErrorToErrMsgId(Throwable e) {
+
+        String networkErrorRegex = ".*io.grpc.StatusRuntimeException: UNAVAILABLE.*";
+        String fleetDoesNotExistRegex = ".*Fleet ID .* does not exist for this partner.*";
+
+        String errMsg = e.getMessage();
+        if (errMsg.matches(networkErrorRegex)) {
+            return R.string.error_msg_no_network;
+        } else if (errMsg.matches(fleetDoesNotExistRegex)) {
+            return R.string.error_msg_vehicle_reg_invalid_fleet;
+        }
+
+        return R.string.error_msg_unknown;
     }
 }

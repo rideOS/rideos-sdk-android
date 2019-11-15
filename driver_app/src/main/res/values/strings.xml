@@ -87,4 +87,9 @@
     <string name="trip_detail_tooltip_text">Tap to see trip details, contact the\nrider, or modify the trip</string>
     <string name="new_ride_request_details_text">You have a new ride request</string>
     <string name="dismiss_driver_action_modal_button_text">Dismiss</string>
+
+    <!-- Error Messages -->
+    <string name="error_msg_unknown">Oops.. something went wrong. Please try again</string>
+    <string name="error_msg_no_network">Please check your network and try again</string>
+    <string name="error_msg_vehicle_reg_invalid_fleet">Your fleet has not been registered. Please contact your service operator</string>
 </resources>
