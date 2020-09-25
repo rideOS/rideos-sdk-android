@@ -18,7 +18,6 @@ package ai.rideos.android.driver_app.online.driving.drive_pending;
 import ai.rideos.android.common.app.map.MapRelay;
 import ai.rideos.android.common.architecture.ControllerTypes;
 import ai.rideos.android.common.architecture.FragmentViewController;
-import ai.rideos.android.common.model.LatLng;
 import ai.rideos.android.common.view.resources.AndroidResourceProvider;
 import ai.rideos.android.device.PotentiallySimulatedDeviceLocator;
 import ai.rideos.android.driver_app.R;

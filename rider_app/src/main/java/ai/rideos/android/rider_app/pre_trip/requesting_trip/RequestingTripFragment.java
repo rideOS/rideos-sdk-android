@@ -23,12 +23,12 @@ import ai.rideos.android.common.view.layout.LoadableDividerView;
 import ai.rideos.android.rider_app.R;
 import ai.rideos.android.rider_app.pre_trip.requesting_trip.RequestingTripFragment.RequestingTripArgs;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class RequestingTripFragment extends FragmentViewController<RequestingTripArgs, RequestingTripListener> {

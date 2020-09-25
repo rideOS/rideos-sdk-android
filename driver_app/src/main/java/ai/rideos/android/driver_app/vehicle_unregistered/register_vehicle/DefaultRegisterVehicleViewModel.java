@@ -23,16 +23,14 @@ import ai.rideos.android.common.reactive.SchedulerProviders.DefaultSchedulerProv
 import ai.rideos.android.driver_app.R;
 import ai.rideos.android.interactors.DriverVehicleInteractor;
 import ai.rideos.android.model.VehicleRegistration;
-
 import android.telephony.PhoneNumberUtils;
 import androidx.annotation.VisibleForTesting;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
-import timber.log.Timber;
-
 import java.util.function.Function;
+import timber.log.Timber;
 
 public class DefaultRegisterVehicleViewModel implements RegisterVehicleViewModel {
 

@@ -37,7 +37,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import timber.log.Timber;
 
 public class RideOsRouteInteractor extends GrpcServerInteractor<PathServiceFutureStub> implements RouteInteractor {
     private final PolylineDecoder polylineDecoder;

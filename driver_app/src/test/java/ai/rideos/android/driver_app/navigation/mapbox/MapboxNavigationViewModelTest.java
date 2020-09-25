@@ -16,11 +16,11 @@
 package ai.rideos.android.driver_app.navigation.mapbox;
 
 import ai.rideos.android.common.device.DeviceLocator;
+import ai.rideos.android.common.interactors.mapbox.MapboxApiInteractor;
 import ai.rideos.android.common.model.LatLng;
 import ai.rideos.android.common.model.LocationAndHeading;
 import ai.rideos.android.common.reactive.Result;
 import ai.rideos.android.common.reactive.SchedulerProviders.TrampolineSchedulerProvider;
-import ai.rideos.android.common.interactors.mapbox.MapboxApiInteractor;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Point;
 import io.reactivex.Observable;

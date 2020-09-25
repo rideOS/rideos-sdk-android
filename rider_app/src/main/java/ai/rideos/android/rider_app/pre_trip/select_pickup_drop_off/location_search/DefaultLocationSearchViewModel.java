@@ -16,8 +16,10 @@
 package ai.rideos.android.rider_app.pre_trip.select_pickup_drop_off.location_search;
 
 import ai.rideos.android.common.device.DeviceLocator;
+import ai.rideos.android.common.interactors.LocationAutocompleteInteractor;
 import ai.rideos.android.common.model.LatLng;
 import ai.rideos.android.common.model.LocationAndHeading;
+import ai.rideos.android.common.model.LocationAutocompleteResult;
 import ai.rideos.android.common.model.NamedTaskLocation;
 import ai.rideos.android.common.model.TaskLocation;
 import ai.rideos.android.common.reactive.RetryBehaviors;
@@ -26,8 +28,6 @@ import ai.rideos.android.common.reactive.SchedulerProviders.DefaultSchedulerProv
 import ai.rideos.android.common.utils.Locations;
 import ai.rideos.android.common.view.resources.ResourceProvider;
 import ai.rideos.android.interactors.HistoricalSearchInteractor;
-import ai.rideos.android.common.interactors.LocationAutocompleteInteractor;
-import ai.rideos.android.common.model.LocationAutocompleteResult;
 import ai.rideos.android.model.LocationSearchFocusType;
 import ai.rideos.android.model.LocationSearchInitialState;
 import ai.rideos.android.model.LocationSearchOptionModel;

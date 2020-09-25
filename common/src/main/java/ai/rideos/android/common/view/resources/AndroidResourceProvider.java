@@ -17,8 +17,8 @@ package ai.rideos.android.common.view.resources;
 
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.core.content.res.ResourcesCompat;
 import android.util.TypedValue;
+import androidx.core.content.res.ResourcesCompat;
 import java.util.Locale;
 
 public class AndroidResourceProvider implements ResourceProvider {

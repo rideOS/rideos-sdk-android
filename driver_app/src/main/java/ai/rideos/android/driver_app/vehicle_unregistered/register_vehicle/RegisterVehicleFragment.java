@@ -40,8 +40,6 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import timber.log.Timber;
-
 import java.util.function.Consumer;
 
 public class RegisterVehicleFragment extends FragmentViewController<EmptyArg, RegisterVehicleListener> {

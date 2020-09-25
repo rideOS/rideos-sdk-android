@@ -15,7 +15,6 @@
  */
 package ai.rideos.android.driver_app.vehicle_settings;
 
-import ai.rideos.android.common.app.dependency.CommonDependencyRegistry;
 import ai.rideos.android.common.app.menu_navigator.OpenMenuListener;
 import ai.rideos.android.common.authentication.User;
 import ai.rideos.android.common.device.InputMethodManagerKeyboardManager;

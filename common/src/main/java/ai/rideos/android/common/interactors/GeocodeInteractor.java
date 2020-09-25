@@ -15,8 +15,8 @@
  */
 package ai.rideos.android.common.interactors;
 
-import ai.rideos.android.common.model.NamedTaskLocation;
 import ai.rideos.android.common.model.LatLng;
+import ai.rideos.android.common.model.NamedTaskLocation;
 import ai.rideos.android.common.reactive.Result;
 import io.reactivex.Observable;
 import java.util.List;

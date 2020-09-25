@@ -18,12 +18,12 @@ package ai.rideos.android.common.app.map;
 import ai.rideos.android.common.view.ViewMarginProvider;
 import ai.rideos.android.common.view.ViewMargins;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks;
-import android.view.View;
 
 public class MapInsetFragmentListener extends FragmentLifecycleCallbacks {
     private final MapStateReceiver mapStateReceiver;

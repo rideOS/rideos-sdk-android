@@ -17,7 +17,6 @@ package ai.rideos.android.rider_app.pre_trip;
 
 import ai.rideos.android.common.reactive.Notification;
 import ai.rideos.android.common.viewmodel.BackListener;
-import ai.rideos.android.common.viewmodel.UpListener;
 import ai.rideos.android.common.viewmodel.ViewModel;
 import ai.rideos.android.model.PreTripState;
 import ai.rideos.android.rider_app.pre_trip.confirm_location.ConfirmLocationListener;

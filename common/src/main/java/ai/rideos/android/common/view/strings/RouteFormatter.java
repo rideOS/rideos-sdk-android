@@ -16,9 +16,9 @@
 package ai.rideos.android.common.view.strings;
 
 import ai.rideos.android.common.R;
+import ai.rideos.android.common.location.Distance;
 import ai.rideos.android.common.model.RouteInfoModel;
 import ai.rideos.android.common.reactive.Result;
-import ai.rideos.android.common.location.Distance;
 import ai.rideos.android.common.view.resources.ResourceProvider;
 import ai.rideos.android.common.view.strings.Units.UnitType;
 import java.util.Locale;

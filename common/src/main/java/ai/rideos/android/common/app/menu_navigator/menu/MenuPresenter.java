@@ -23,13 +23,13 @@ import ai.rideos.android.common.model.MenuOption;
 import ai.rideos.android.common.user_storage.SharedPreferencesUserStorageWriter;
 import ai.rideos.android.common.view.Presenter;
 import android.content.Context;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 
 // TODO we should probably rename this concept of "ViewController". Fragments are going to replace ViewControllers, but

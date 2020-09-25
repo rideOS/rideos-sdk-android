@@ -19,15 +19,15 @@ import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Matchers.any;
 
 import ai.rideos.android.common.device.DeviceLocator;
+import ai.rideos.android.common.interactors.LocationAutocompleteInteractor;
 import ai.rideos.android.common.model.LatLng;
 import ai.rideos.android.common.model.LocationAndHeading;
+import ai.rideos.android.common.model.LocationAutocompleteResult;
 import ai.rideos.android.common.model.NamedTaskLocation;
 import ai.rideos.android.common.model.map.LatLngBounds;
 import ai.rideos.android.common.reactive.SchedulerProviders.TrampolineSchedulerProvider;
 import ai.rideos.android.common.view.resources.ResourceProvider;
 import ai.rideos.android.interactors.HistoricalSearchInteractor;
-import ai.rideos.android.common.interactors.LocationAutocompleteInteractor;
-import ai.rideos.android.common.model.LocationAutocompleteResult;
 import ai.rideos.android.model.LocationSearchFocusType;
 import ai.rideos.android.model.LocationSearchInitialState;
 import ai.rideos.android.model.LocationSearchOptionModel;

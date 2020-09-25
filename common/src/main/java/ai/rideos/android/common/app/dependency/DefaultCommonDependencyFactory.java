@@ -21,7 +21,6 @@ import ai.rideos.android.common.interactors.DefaultDeviceRegistryInteractor;
 import ai.rideos.android.common.interactors.DefaultFleetInteractor;
 import ai.rideos.android.common.interactors.DeviceRegistryInteractor;
 import ai.rideos.android.common.interactors.FleetInteractor;
-import ai.rideos.android.common.interactors.RideOsRouteInteractor;
 import android.content.Context;
 
 public abstract class DefaultCommonDependencyFactory implements CommonDependencyFactory {

@@ -21,10 +21,10 @@ import ai.rideos.android.common.architecture.FragmentViewController;
 import ai.rideos.android.common.view.layout.BottomDetailAndButtonView;
 import ai.rideos.android.rider_app.R;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 
 public class ConfirmingEditPickupFragment extends FragmentViewController<EmptyArg, ConfirmingEditPickupListener> {
     @Override

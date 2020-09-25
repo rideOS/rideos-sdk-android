@@ -17,7 +17,6 @@ package ai.rideos.android.common.viewmodel.progress;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 import io.reactivex.subjects.BehaviorSubject;

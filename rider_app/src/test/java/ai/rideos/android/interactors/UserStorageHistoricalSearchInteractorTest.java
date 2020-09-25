@@ -19,10 +19,10 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 
+import ai.rideos.android.common.model.LocationAutocompleteResult;
 import ai.rideos.android.common.reactive.SchedulerProviders.TrampolineSchedulerProvider;
 import ai.rideos.android.common.user_storage.UserStorageReader;
 import ai.rideos.android.common.user_storage.UserStorageWriter;
-import ai.rideos.android.common.model.LocationAutocompleteResult;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

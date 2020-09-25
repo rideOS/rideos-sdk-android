@@ -16,8 +16,8 @@
 package ai.rideos.android.common.view;
 
 import ai.rideos.android.common.viewmodel.BackListener;
-import androidx.annotation.CallSuper;
 import android.view.View;
+import androidx.annotation.CallSuper;
 
 /**
  * ParentPresenter defines a Presenter that controls other Presenter in a hierarchy. The parent
